@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
+    username: ${MYSQLUSER}
+    password: ${MYSQLPASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: prd
+
+app:
+  pix:
+    clientId: ${CLIENT_ID}
+    clientSecret: ${CLIENT_SECRET}
+    sandbox: false
+    debug: false
+
+environment-url:
+  url: ${URL}

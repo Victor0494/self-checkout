@@ -1,0 +1,10 @@
+app:
+  pix:
+    clientId: ${CLIENT_ID}
+    clientSecret: ${CLIENT_SECRET}
+    certificatePath: ${CERTIFICATE_PATH}
+    sandbox: false
+    debug: false
+
+environment-url:
+  url: ${URL}

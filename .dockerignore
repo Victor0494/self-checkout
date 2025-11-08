@@ -1,0 +1,17 @@
+# Ignorar pastas locais e configs sensíveis
+config/
+local/
+
+# Ignorar configs de IDE
+.idea/
+*.iml
+
+# Ignorar arquivos de sistema
+.DS_Store
+
+
+.vscode
+
+.env
+
+.git

@@ -29,13 +29,13 @@ public class PixService {
 
     private final JSONObject configuracoes;
 
-    public PixService(final PixConfig pixConfig, final String certificatePath) throws IOException {
+    public PixService(final PixConfig pixConfig) throws IOException {
         String resolvedCertPath = resolveCertificatePath(pixConfig.certificatePath());
 
         this.configuracoes = new JSONObject();
         this.configuracoes.put("client_id", pixConfig.clientId());
         this.configuracoes.put("client_secret", pixConfig.clientSecret());
-        this.configuracoes.put("certificate", certificatePath);
+        this.configuracoes.put("certificate", resolvedCertPath);
         this.configuracoes.put("sandbox", pixConfig.sandbox());
         this.configuracoes.put("debug", pixConfig.debug());
     }

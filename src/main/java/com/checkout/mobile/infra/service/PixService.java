@@ -2,24 +2,19 @@ package com.checkout.mobile.infra.service;
 
 import br.com.efi.efisdk.EfiPay;
 import br.com.efi.efisdk.exceptions.EfiPayException;
+import com.checkout.mobile.infra.config.CertificateConfig;
 import com.checkout.mobile.infra.dto.PixConfig;
 import com.checkout.mobile.infra.dto.PixRequestPayload;
-import com.checkout.mobile.infra.dto.PixResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,13 +24,13 @@ public class PixService {
 
     private final JSONObject configuracoes;
 
-    public PixService(final PixConfig pixConfig) throws IOException {
-        String resolvedCertPath = resolveCertificatePath(pixConfig.certificatePath());
+    public PixService(final PixConfig pixConfig, final CertificateConfig CertificateConfig) throws IOException {
+//        String resolvedCertPath = resolveCertificatePath(pixConfig.certificatePath());
 
         this.configuracoes = new JSONObject();
         this.configuracoes.put("client_id", pixConfig.clientId());
         this.configuracoes.put("client_secret", pixConfig.clientSecret());
-        this.configuracoes.put("certificate", resolvedCertPath);
+        this.configuracoes.put("certificate", CertificateConfig.certificatePath());
         this.configuracoes.put("sandbox", pixConfig.sandbox());
         this.configuracoes.put("debug", pixConfig.debug());
     }

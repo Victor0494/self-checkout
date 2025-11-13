@@ -26,9 +26,7 @@ public class FilesController {
         return fileService.getFiles(carousel);
     }
 
-    @GetMapping(
-            value = "/images/{filename:.+}"
-    )
+    @GetMapping(value = "/images/{filename:.+}")
     public ResponseEntity<byte[]> getImage(@PathVariable String filename, @RequestParam boolean carousel) throws IOException {
         String imgPath;
 

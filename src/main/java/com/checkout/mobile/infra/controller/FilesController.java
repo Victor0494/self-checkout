@@ -26,30 +26,4 @@ public class FilesController {
         return fileService.getFiles(carousel);
     }
 
-    @GetMapping(value = "/images/{filename:.+}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String filename, @RequestParam boolean carousel) throws IOException {
-        String imgPath;
-
-        if (carousel) {
-            imgPath = "static/images/carousel/";
-        } else {
-            imgPath = "static/images/popular/";
-        }
-
-        ClassPathResource imgFile = new ClassPathResource(imgPath + filename);
-
-        if (!imgFile.exists()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
-        MediaType mediaType = filename.endsWith(".png")
-                ? MediaType.IMAGE_PNG
-                : MediaType.IMAGE_JPEG;
-
-        return ResponseEntity.ok()
-                .contentType(mediaType)
-                .body(bytes);
-    }
-
 }

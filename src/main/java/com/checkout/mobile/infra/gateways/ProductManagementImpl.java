@@ -13,9 +13,6 @@ import java.util.List;
 @Service
 public class ProductManagementImpl implements ProductGateway {
 
-    @Value("${environment-url.url}")
-    private String PATH;
-
     private final ProductRepository productRepository;
 
     public ProductManagementImpl(ProductRepository productRepository) {
@@ -31,8 +28,7 @@ public class ProductManagementImpl implements ProductGateway {
                 response.getPrice(),
                 response.getBarCode(),
                 response.getDescription(),
-//                TODO NAO ENVIAR TODO A URL PARA O FRONT POIS ELA FICA EXPOSTA
-                PATH + "/images/popular/" + response.getImgPath());
+                "/images/popular/" + response.getImgPath());
     }
 
     @Override
@@ -41,7 +37,7 @@ public class ProductManagementImpl implements ProductGateway {
         return products.stream().map(productEntity -> new Product(
                 productEntity.name(),
                 productEntity.price(),
-                PATH + "/images/popular/" + productEntity.imgPath())).toList();
+                "/images/popular/" + productEntity.imgPath())).toList();
 
     }
 }

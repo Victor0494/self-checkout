@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 @Service
 public class FileService {
 
-    public static final String STATIC_IMAGES_CAROUSEL = "src/main/resources/static/images/carousel";
-    public static final String STATIC_IMAGES_POPULAR = "src/main/resources/static/images/popular";
+    public static final String STATIC_IMAGES_CAROUSEL = "src/main/resources/images/carousel";
+    public static final String STATIC_IMAGES_POPULAR = "src/main/resources/images/popular";
 
     public List<String> getFiles(boolean carousel) throws IOException {
         Path folder;

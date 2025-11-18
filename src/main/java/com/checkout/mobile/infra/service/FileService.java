@@ -3,7 +3,10 @@ package com.checkout.mobile.infra.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,25 +16,27 @@ import java.util.stream.Stream;
 @Service
 public class FileService {
 
-    public static final String STATIC_IMAGES_CAROUSEL = "src/main/resources/images/carousel";
-    public static final String STATIC_IMAGES_POPULAR = "src/main/resources/images/popular";
-
     public List<String> getFiles(boolean carousel) throws IOException {
-        Path folder;
-        String imgPath;
+        String folder = carousel ? "static/images/carousel" : "static/images/popular";
+        String imgPath = carousel ? "/images/carousel/" : "/images/popular/";
 
-        if (carousel) {
-            folder = Paths.get(STATIC_IMAGES_CAROUSEL);
-            imgPath = "/images/carousel/";
-        } else {
-            folder = Paths.get(STATIC_IMAGES_POPULAR);
-            imgPath = "/images/popular/";
+        URL url = getClass().getClassLoader().getResource(folder);
+
+        if (url == null) {
+            throw new FileNotFoundException("Pasta não encontrada: " + folder);
         }
 
-        try (Stream<Path> paths = Files.list(folder)) {
+        Path path;
+        try {
+            path = Paths.get(url.toURI());
+        } catch (URISyntaxException e) {
+            throw new IOException("Erro ao converter URL para Path", e);
+        }
+
+        try (Stream<Path> paths = Files.list(path)) {
             return paths
                     .filter(Files::isRegularFile)
-                    .map(path -> imgPath + path.getFileName().toString())
+                    .map(p -> imgPath + p.getFileName().toString())
                     .toList();
         }
     }

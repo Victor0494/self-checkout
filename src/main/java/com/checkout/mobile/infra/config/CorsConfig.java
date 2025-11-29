@@ -12,7 +12,8 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOriginPatterns(
                         "http://localhost:4200",
-                        "https://*.ngrok-free.app"
+                        "https://*.ngrok-free.app",
+                        "https://mobile-front-mauve.vercel.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
@@ -21,7 +22,8 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/images/**")
                 .allowedOriginPatterns(
                         "http://localhost:4200",
-                        "https://*.ngrok-free.app"
+                        "https://*.ngrok-free.app",
+                        "https://mobile-front-mauve.vercel.app"
                 )
                 .allowedMethods("GET")
                 .allowedHeaders("*")
